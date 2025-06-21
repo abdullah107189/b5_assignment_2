@@ -105,8 +105,6 @@ VALUES (
         NULL
     );
 
-
-
 -- problem 1
 INSERT INTO
     rangers ("name", region)
@@ -125,24 +123,46 @@ FROM rangers r
     JOIN sightings s USING (ranger_id)
 GROUP BY
     r.name
-ORDER BY
-    r.name ASC;
+ORDER BY r.name ASC;
 
 -- problem 5
-SELECT sp.common_name FROM species sp
+SELECT sp.common_name
+FROM species sp
     LEFT JOIN sightings si ON sp.species_id = si.species_id
-    WHERE si.species_id IS NULL;
+WHERE
+    si.species_id IS NULL;
 
 --problem 6
-SELECT common_name, sighting_time, "name" FROM sightings si
-JOIN species sp ON si.species_id = sp.species_id
-JOIN rangers r ON si.ranger_id = r.ranger_id
-ORDER BY sighting_time DESC LIMIT 2;
+SELECT
+    common_name,
+    sighting_time,
+    "name"
+FROM
+    sightings si
+    JOIN species sp ON si.species_id = sp.species_id
+    JOIN rangers r ON si.ranger_id = r.ranger_id
+ORDER BY sighting_time DESC
+LIMIT 2;
 
 --problem 7
-UPDATE species SET conservation_status = 'Historic'
- WHERE discovery_date < '1800-01-01';
+UPDATE species
+SET
+    conservation_status = 'Historic'
+WHERE
+    discovery_date < '1800-01-01';
+
+--problem 8
+SELECT
+    sighting_id, CASE
+        WHEN EXTRACT(
+            HOUR
+            FROM sighting_time
+        ) < 12 THEN 'Morning'
+        WHEN EXTRACT(HOUR FROM sighting_time) >= 12 AND EXTRACT(HOUR FROM sighting_time) < 17  THEN 'Afternoon'
+        ELSE 'Evening'
+    END AS Time_of_day
+FROM sightings;
 
 SELECT * FROM rangers;
+
 SELECT * FROM species;
-SELECT * FROM sightings;
