@@ -163,6 +163,6 @@ SELECT
     END AS Time_of_day
 FROM sightings;
 
-SELECT * FROM rangers;
-
-SELECT * FROM species;
+--problem 9
+DELETE FROM rangers WHERE ranger_id NOT in (SELECT DISTINCT ranger_id
+FROM sightings);
