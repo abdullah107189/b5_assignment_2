@@ -105,11 +105,7 @@ VALUES (
         NULL
     );
 
-SELECT * FROM rangers;
 
-SELECT * FROM species;
-
-SELECT * FROM sightings;
 
 -- problem 1
 INSERT INTO
@@ -131,3 +127,12 @@ GROUP BY
     r.name
 ORDER BY
     r.name ASC;
+
+-- problem 5
+SELECT sp.common_name FROM species sp
+    LEFT JOIN sightings si ON sp.species_id = si.species_id
+    WHERE si.species_id IS NULL;
+
+
+SELECT * FROM species;
+SELECT * FROM sightings;
