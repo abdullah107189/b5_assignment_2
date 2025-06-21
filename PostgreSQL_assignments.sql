@@ -43,3 +43,6 @@ INSERT INTO sightings (species_id, ranger_id, location, sighting_time, notes) VA
 SELECT * FROM rangers;
 SELECT * FROM species;
 SELECT * FROM sightings;
+
+-- problem 1
+INSERT INTO rangers("name",region) VALUES ('Derek Fox', 'Coastal Plains');
