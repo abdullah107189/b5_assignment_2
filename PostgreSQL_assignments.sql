@@ -133,20 +133,15 @@ SELECT sp.common_name FROM species sp
     LEFT JOIN sightings si ON sp.species_id = si.species_id
     WHERE si.species_id IS NULL;
 
-
--- 6️⃣ Show the most recent 2 sightings.
-
-
--- | common_name   | sighting_time        | name        |
--- |---------------|----------------------|-------------|
--- | Snow Leopard  | 2024-05-18 18:30:00  | Bob White   |
--- | Red Panda     | 2024-05-15 09:10:00  | Carol King  |
-
 --problem 6
 SELECT common_name, sighting_time, "name" FROM sightings si
 JOIN species sp ON si.species_id = sp.species_id
 JOIN rangers r ON si.ranger_id = r.ranger_id
 ORDER BY sighting_time DESC LIMIT 2;
+
+--problem 7
+UPDATE species SET conservation_status = 'Historic'
+ WHERE discovery_date < '1800-01-01';
 
 SELECT * FROM rangers;
 SELECT * FROM species;
